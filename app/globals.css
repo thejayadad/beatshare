@@ -1,26 +1,68 @@
+/* Tailwind/DaisyUI load */
 @import "tailwindcss";
+@plugin "daisyui";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ---- Brand palette (no config needed) ---- */
+:root{
+  --p:  #6c63ff;  /* primary */
+  --pc: #ffffff;  /* on-primary */
+  --s:  #00bfa6;  /* secondary */
+  --sc: #ffffff;
+  --a:  #ffb703;  /* accent */
+  --ac: #1f2937;
+  --n:  #2b2d31;  /* neutral text */
+  --nc: #ffffff;
+
+  --b1: #ffffff;  /* base-100 */
+  --b2: #f7f7f7;  /* base-200 */
+  --bc: #2b2d31;  /* base-content */
+
+  /* layout + player vars */
+  --header-h: 64px;  /* matches h-16 header */
+  --player-h: 84px;  /* bottom player height */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* global sizing */
+html, body, :root, .app{
+  height:100%;
+  width:100%;
+  overflow-x:hidden;
+  @apply text-sm;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* when a track is playing, PlayerProvider toggles this class */
+@layer base {
+  body.has-player { padding-bottom: var(--player-h); }
+}
+
+/* helper utilities (easy to reuse) */
+@layer utilities{
+  .text-body     { color: var(--n); }
+  .bg-surface    { background-color: var(--b1); }
+  .bg-subtle     { background-color: var(--b2); }
+  .ring-brand    { --tw-ring-color: var(--p); }
+  .text-brand    { color: var(--p); }
+  .bg-brand-10   { background-color: rgba(108,99,255,.10); }
+  .ring-muted    { --tw-ring-color: rgba(43,45,49,.12); }
+  .border-muted  { border-color: rgb(229 229 229); } /* ~neutral-200 */
+
+  /* nice accent bar for section titles */
+  .section-accent { position: relative; padding-left: .875rem; }
+  .section-accent::before{
+    content:""; position:absolute; left:0; top:.2em; bottom:.2em;
+    width:4px; border-radius:9999px;
+    background: linear-gradient(180deg, var(--p), var(--a));
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* multi-line clamp helpers */
+  .clamp-1{ display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical; overflow:hidden;}
+  .clamp-2{ display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
+
+  /* soft “reflection” under images */
+  .card-reflection{ position:relative; }
+  .card-reflection::after{
+    content:""; position:absolute; left:8%; right:8%; bottom:-14%;
+    height:36%; background: linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,0));
+    filter: blur(18px); border-radius: 9999px; pointer-events:none;
+  }
 }
