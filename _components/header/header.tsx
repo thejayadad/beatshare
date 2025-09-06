@@ -7,7 +7,7 @@ import UserMenu from "./UserMenu";
 export default function Header() {
   return (
     <header className="sticky top-0 z-40 bg-surface/80 backdrop-blur border-b border-dotted border-muted">
-      <div className="navbar mx-auto max-w-7xl px-3 sm:px-4 lg:px-6">
+      <div className="mx-auto max-w-screen-2xl px-3 sm:px-4 lg:px-6 py-2">
         <div className="navbar-start">
           <Logo />
         </div>

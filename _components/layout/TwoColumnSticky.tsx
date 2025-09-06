@@ -4,7 +4,7 @@ export default function TwoColumn({
   gap = "gap-6",
 }: { left: React.ReactNode; right: React.ReactNode; gap?: string }) {
   return (
-    <div className={`mx-auto max-w-7xl px-3 sm:px-4 lg:px-6 ${gap}
+    <div className={`mx-auto max-w-screen-2xl px-3 sm:px-4 lg:px-6 ${gap}
                      grid grid-cols-1 lg:grid-cols-12 items-start`}>
       <main className="lg:col-span-8 min-w-0 space-y-4">
         {left}
